@@ -1,7 +1,7 @@
 import React, {Component} from "react";
-import Search from "./EmployeeSearch";
-import Table from "./EmployeeTable";
-import api from "../utils/api";
+import EmployeeSearch from "./EmployeeSearch";
+import EmployeeTable from "./EmployeeTable";
+import Api from "../utils/Api";
 
 class Container extends Component {
   state = {
@@ -13,7 +13,7 @@ class Container extends Component {
   };
 
   componentDidMount() {
-    api
+    Api
       .getEmployee()
       .then((response) => {
         console.log(response);
@@ -23,7 +23,7 @@ class Container extends Component {
             LastName: emp.name.last,
             picture: emp.picture.large,
             email: emp.email,
-            PhoneNumber: emp.phone,
+            PhoneNumber: emp.PhoneNumber,
             key: idx,
           })),
         });
@@ -34,7 +34,7 @@ class Container extends Component {
   searchEmp = (search) => {
     console.log(search);
     var filterEmp = this.state.result.filter(
-      (person) => person.fName === search
+      (person) => person.FirstName === search
     );
     this.setState({
       result: filterEmp,
@@ -47,6 +47,7 @@ class Container extends Component {
     const name = event.target.name;
     this.setState({
       [name]: value,
+      
     });
   };
 
@@ -74,7 +75,7 @@ class Container extends Component {
 
         <div className="row">
           <div className="col-md-6">
-            <Search
+            <EmployeeSearch
               value={this.state.search}
               handleInputChange={this.handleInputChange}
               handleFormSubmit={this.handleFormSubmit}
@@ -85,15 +86,15 @@ class Container extends Component {
         <div className="row">
           <table className="table">
             <tr>
-              <th>Photo</th>
+              
               <th>First Name</th>
               <th>Last Name</th>
               <th>Email</th>
-              <th>Phone</th>
+              <th>Phone Number</th>
             </tr>
 
-            {[... this.state.result].map((item) => 
-            <Table 
+            {[...this.state.result].map((item) => 
+            <EmployeeTable 
             picture={item.picture}
             FirstName={item.FirstName}
             LastName={item.LastName}
@@ -109,4 +110,4 @@ class Container extends Component {
   }
 }
 
-export default EmployeeContainer;
+export default Container;

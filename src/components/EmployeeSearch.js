@@ -1,6 +1,6 @@
 import React from "react";
 
-function Search(props) {
+function EmployeeSearch(props) {
     return (
         <form>
             <div className="form-group" >
@@ -21,4 +21,4 @@ function Search(props) {
     );
 }
 
-export default Search;
+export default EmployeeSearch;     
